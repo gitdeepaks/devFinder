@@ -1,0 +1,20 @@
+{
+  "name": "devfinder",
+  "module": "src/app.js",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "scripts": {
+    "start": "bun run src/app.js",
+    "dev": "bun run --watch src/app.js"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.14.1"
+  }
+}
