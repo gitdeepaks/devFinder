@@ -31,14 +31,14 @@ app.post("/signup", async (req, res) => {
 app.get("/user", async (req, res) => {
   const userEmail = req.body.emailId;
   try {
-    const user = await User.find({ emailId: userEmail });
+    const user = await User.findOne({ emailId: userEmail });
+    // res.send(user);
 
     if (!user || user.length === 0) {
       return res.status(404).json({
         message: "User not found",
       });
     } else {
-      res.send(user);
     }
 
     res.status(200).json({
@@ -62,6 +62,46 @@ app.get("/feed", async (req, res) => {
     res.status(200).json({
       message: "Users found",
       users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Something went wrong",
+      error: error.message,
+    });
+  }
+});
+
+app.delete("/user", async (req, res) => {
+  const userId = req.body.userId;
+  try {
+    const user = await User.findByIdAndDelete({ _id: userId });
+    // const user = await User.findByIdAndDelete(userId);
+    res.status(200).json({
+      message: "User deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Something went wrong",
+      error: error.message,
+    });
+  }
+});
+
+// Update Data of the user
+
+app.patch("/user", async (req, res) => {
+  const userId = req.body.userId;
+  const data = req.body;
+
+  // console.log(JSON.stringify(data));
+
+  try {
+    const user = await User.findByIdAndUpdate({ _id: userId }, data, {
+      returnDocument: "after",
+    });
+    console.log(user);
+    res.status(200).json({
+      message: "User updated successfully",
     });
   } catch (error) {
     res.status(500).json({
