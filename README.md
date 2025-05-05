@@ -20,4 +20,4 @@
 - API level validations on PATCH Request and SignUp POST Request
 - DATA Sanitization - Add API validations for each field
 - Install validator and explore the validator library functions and use it for password and URLs
-- Never trusy req.body
+- Never trust req.body
