@@ -75,7 +75,6 @@ app.delete("/user", async (req, res) => {
   const userId = req.body.userId;
   try {
     const user = await User.findByIdAndDelete({ _id: userId });
-    // const user = await User.findByIdAndDelete(userId);
     res.status(200).json({
       message: "User deleted successfully",
     });
@@ -89,13 +88,30 @@ app.delete("/user", async (req, res) => {
 
 // Update Data of the user
 
-app.patch("/user", async (req, res) => {
-  const userId = req.body.userId;
+app.patch("/user/:userId", async (req, res) => {
+  const userId = req.params?.userId;
   const data = req.body;
 
   // console.log(JSON.stringify(data));
 
   try {
+    const ALLOWED_UPDATES = ["photoUrl", "about", "gender", "age", "skills"];
+
+    const isUpdateAllowed = Object.keys(data).every((k) =>
+      ALLOWED_UPDATES.includes(k)
+    );
+
+    if (!isUpdateAllowed) {
+      return res.status(400).json({
+        message: "Invalid update",
+      });
+    }
+    if (data?.skills.lenght > 10) {
+      return res.status(400).json({
+        message: "Skills cannot be more than 10",
+      });
+    }
+
     const user = await User.findByIdAndUpdate({ _id: userId }, data, {
       returnDocument: "after",
       runValidators: true,
