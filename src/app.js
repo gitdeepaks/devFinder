@@ -1,3 +1,5 @@
+const { validateSignUpData } = require("./utils/validation");
+
 const express = require("express");
 const connectDB = require("./config/database");
 const app = express();
@@ -9,10 +11,18 @@ const PORT = process.env.PORT || 4111;
 app.use(express.json());
 
 app.post("/signup", async (req, res) => {
-  const userObj = req.body;
-
-  const user = new User(userObj);
   try {
+    // validation of data
+    validateSignUpData(req);
+
+    //Encrypt the password
+
+    //Generate a JWT token
+
+    const userObj = req.body;
+
+    const user = new User(userObj);
+
     await user.save();
     res.status(201).json({
       message: "User created successfully",
