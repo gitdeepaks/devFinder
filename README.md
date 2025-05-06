@@ -21,3 +21,8 @@
 - DATA Sanitization - Add API validations for each field
 - Install validator and explore the validator library functions and use it for password and URLs
 - Never trust req.body
+- validate data in signup API
+- Install bcryptjs package
+- Create a PasswordHased usin bcryptjs.hasg ans save user with hashed password
+- Create a Login API
+- Compare passwords and through errors if email or password is invalid
