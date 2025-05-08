@@ -35,3 +35,5 @@
 - Add the userAuth middleware in profile API and a new sendconnectionRequest API.
 - Set the expiry of JWT token and cookies to 7 days,
 - Creating a userSchema for password validation and getting the JWT.
+
+- Exploting the API's of Tinder .

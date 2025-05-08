@@ -1,5 +1,4 @@
 const { validateSignUpData } = require("./utils/validation");
-
 const express = require("express");
 const connectDB = require("./config/database");
 const User = require("./models/user.model");
@@ -7,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const { userAuth } = require("./middlewares/auth.middleware");
+
 const app = express();
 
 const PORT = process.env.PORT || 4111;
