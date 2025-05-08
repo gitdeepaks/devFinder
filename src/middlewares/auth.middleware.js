@@ -1,23 +1,47 @@
-const adminAuth = (req, res, next) => {
-  console.log("admin middleware is running");
-  const token = "zxsffxdfgfdd";
-  const isAdminAuthorized = token === "zxsffxdfgfdd";
-  if (!isAdminAuthorized) {
-    res.status(401).send("Unauthorized");
-  } else {
-    next();
+const jwt = require("jsonwebtoken");
+const User = require("../models/user.model");
+
+const userAuth = async (req, res, next) => {
+  // read the token from  the req cookies
+  try {
+    const cookies = req.cookies;
+
+    const { token } = cookies;
+
+    if (!token) {
+      return res.status(401).json({
+        message: "Unauthorized",
+      });
+    }
+
+    const decodedObj = await jwt.verify(token, process.env.JWT_SECRET);
+
+    const { _id } = decodedObj;
+
+    if (_id) {
+      const user = await User.findById(_id);
+
+      if (!user) {
+        return res.status(401).json({
+          message: "Unauthorized",
+        });
+      } else {
+        req.user = user;
+        next();
+      }
+    } else {
+      return res.status(401).json({
+        message: "Unauthorized",
+      });
+    }
+    // validate the token
+    // Find the user
+  } catch (error) {
+    res.status(401).json({
+      message: "Unauthorized",
+      error: error.message,
+    });
   }
 };
 
-const userAuth = (req, res, next) => {
-  console.log("user middleware is running");
-  const token = "zxsffxdfgfdd";
-  const isUserAuthorized = token === "zxsffxdfgfdd";
-  if (!isUserAuthorized) {
-    res.status(401).send("Unauthorized");
-  } else {
-    next();
-  }
-};
-
-module.exports = { adminAuth, userAuth };
+module.exports = { userAuth };

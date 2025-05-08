@@ -25,4 +25,13 @@
 - Install bcryptjs package
 - Create a PasswordHased usin bcryptjs.hasg ans save user with hashed password
 - Create a Login API
-- Compare passwords and through errors if email or password is invalid
+- Compare passwords and through errors if email or password is invalid.
+- Install paeser
+- just send a dummy cookie
+- Create a GET "/profile" API and check if you get the cookie back.
+- In Login API, after email and password validation, create a JWT Token and send it to user in cookies .
+- Read the cookies inside your profile API's and find the logged in user.
+- Added userAuth Middleware
+- Add the userAuth middleware in profile API and a new sendconnectionRequest API.
+- Set the expiry of JWT token and cookies to 7 days,
+- Creating a userSchema for password validation and getting the JWT.
