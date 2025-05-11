@@ -15,4 +15,36 @@ const validateSignUpData = (req) => {
   }
 };
 
-module.exports = { validateSignUpData };
+const validateEditProfileData = (req) => {
+  const allowedEditFields = [
+    "firstName",
+    "lastName",
+    "emailId",
+    "photoUrl",
+    "gender",
+    "about",
+    "skills",
+    "age",
+  ];
+
+  const isEditAllowed = Object.keys(req.body).every((field) =>
+    allowedEditFields.includes(field)
+  );
+  return isEditAllowed;
+};
+
+const validatePasswordData = (req) => {
+  const { oldPassword, newPassword } = req.body;
+  if (!oldPassword || !newPassword) {
+    throw new Error("Old password and new password are required");
+  }
+  if (oldPassword === newPassword) {
+    throw new Error("New password cannot be the same as the old password");
+  }
+};
+
+module.exports = {
+  validateSignUpData,
+  validateEditProfileData,
+  validatePasswordData,
+};
