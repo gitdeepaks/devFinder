@@ -42,3 +42,9 @@
 - Create routes folder for managing auth, profile,requests routers
 - create authRouter, profileRouter, requestsRouter.
 - use all the routes in the app.js file
+
+- Creating the connection Request Schema add proper validation and indexes.
+
+- Need to to read more about Indexes in Mongoose/MongoDB.
+- Need to Read about $or and $and opequery operators in Mongoose/MongoDB.
+- Need to read about schema.pre and schema.post middleware in Mongoose.
