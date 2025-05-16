@@ -1,11 +1,11 @@
-const bcrypt = require("bcryptjs");
-const express = require("express");
-const User = require("../models/user.model");
-const { validateSignUpData } = require("../utils/validation");
+const bcrypt = require('bcryptjs');
+const express = require('express');
+const User = require('../models/user.model');
+const { validateSignUpData } = require('../utils/validation');
 
 const authRouter = express.Router();
 
-authRouter.post("/signup", async (req, res) => {
+authRouter.post('/signup', async (req, res) => {
   try {
     // validation of data
     validateSignUpData(req);
@@ -28,19 +28,19 @@ authRouter.post("/signup", async (req, res) => {
 
     await user.save();
     res.status(201).json({
-      message: "User created successfully",
+      message: 'User created successfully',
       user,
     });
   } catch (error) {
     res.status(500).json({
-      message: "User creation failed",
+      message: 'User creation failed',
       error: error.message,
     });
   }
 });
 
 // Login API
-authRouter.post("/login", async (req, res) => {
+authRouter.post('/login', async (req, res) => {
   try {
     const { emailId, password } = req.body;
 
@@ -48,7 +48,7 @@ authRouter.post("/login", async (req, res) => {
 
     if (!user) {
       return res.status(400).json({
-        message: "Something went wrong",
+        message: 'Something went wrong',
       });
     }
     const isPasswordValid = await user.validatePassword(password);
@@ -60,39 +60,39 @@ authRouter.post("/login", async (req, res) => {
       console.log(token);
 
       // Add a token to cookie and send the response back to user
-      res.cookie("token", token, {
+      res.cookie('token', token, {
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       });
 
       return res.status(200).json({
-        message: "Login successful",
+        message: 'Login successful',
         user,
       });
     } else {
       return res.status(400).json({
-        message: "Something went wrong",
+        message: 'Something went wrong',
       });
     }
   } catch (error) {
     res.status(500).json({
-      message: "Unauthorized",
+      message: 'Unauthorized',
       error: error.message,
     });
   }
 });
 
 // Logout API
-authRouter.post("/logout", async (req, res) => {
+authRouter.post('/logout', async (req, res) => {
   try {
-    res.cookie("token", "null", {
+    res.cookie('token', 'null', {
       expires: new Date(Date.now()),
     });
     res.status(200).json({
-      message: "Logout successful",
+      message: 'Logout successful',
     });
   } catch (error) {
     res.status(500).json({
-      message: "Something went wrong",
+      message: 'Something went wrong',
       error: error.message,
     });
   }
