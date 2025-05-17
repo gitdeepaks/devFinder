@@ -1,26 +1,26 @@
 # DevFinder API's
 
-authRouter
+## authRouter
 
 - POST /signup
 - POST /login
 - POST /logout
 
-profileRouter
+## profileRouter
 
 - GET /profile/view
 - PATCH /profile/edit
 - PATCH /profile/password
 
-connectionRequestRouter
+## connectionRequestRouter
 
 - POST /request/send/:status/:userId
 - POST /request/review/:status/:requestId
 
-userRouter
+## userRouter
 
 - GET /user/requests/recieved
 - GET /user/conntections
 - GET /user/feed - Gets you the profiles of other users on platform
 
-Status:ignore,interested,accepted,rejected,pensing
+Status:ignore,interested,accepted,rejected,pendig

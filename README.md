@@ -52,3 +52,5 @@
 - Need to think - POST vs GET
 
 - Read about ref and polpulate at https://mongoosejs.com
+
+- Implemented feed logic implemented $and and $nin and $nan.
