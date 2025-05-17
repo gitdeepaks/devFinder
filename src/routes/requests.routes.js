@@ -98,12 +98,14 @@ requestsRouter.post('/request/review/:status/:requestId', userAuth, async (req, 
       });
     }
 
+    const fromUser = await User.findById(connectionRequest.fromUserId);
+
     connectionRequest.status = status;
 
     const data = await connectionRequest.save();
 
     res.status(200).json({
-      message: `${loggedInUser.firstName} ${status} ${connectionRequest.fromUserId.firstName}`,
+      message: `${loggedInUser.firstName} ${status} ${fromUser.firstName} Request`,
       data,
     });
   } catch (error) {

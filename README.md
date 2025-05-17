@@ -48,3 +48,7 @@
 - Need to to read more about Indexes in Mongoose/MongoDB.
 - Need to Read about $or and $and opequery operators in Mongoose/MongoDB.
 - Need to read about schema.pre and schema.post middleware in Mongoose.
+
+- Need to think - POST vs GET
+
+- Read about ref and polpulate at https://mongoosejs.com
